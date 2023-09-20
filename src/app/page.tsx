@@ -1,113 +1,140 @@
 import Image from 'next/image'
-
+import VehiclesMap from "@/components/VehiclesMap";
+import { ArrowUturnLeftIcon, ArrowUturnRightIcon, SignalIcon, StopIcon } from "@heroicons/react/24/outline";
 export default function Home() {
+  const vehicles = [
+    {
+      id: 1,
+      lat: 51.51,
+      lng: -0.1,
+      name: "Vehicle 1",
+      moving: "Turned Left",
+      speed: 12,
+      status: "active"
+    },
+    {
+      id: 2,
+      lat: 51.52,
+      lng: -0.11,
+      name: "Vehicle 2",
+      moving: "Stoped",
+      speed: 77,
+      status: "active"
+    },
+    {
+      id: 3,
+      lat: 51.53,
+      lng: -0.12,
+      name: "Vehicle 3",
+      moving: "Turned Left",
+      speed: 22,
+      status: "inactive"
+    },
+    {
+      id: 4,
+      lat: 51.5,
+      lng: -0.13,
+      name: "Vehicle 4",
+      moving: "Turned Right",
+      speed: 12,
+      status: "active"
+    },
+    {
+      id: 5,
+      lat: 51.53,
+      lng: -0.14,
+      name: "Vehicle 5",
+      moving: "Turned Right",
+      speed: 54,
+      status: "active"
+    },
+    {
+      id: 6,
+      lat: 51.48,
+      lng: -0.15,
+      name: "Vehicle 6",
+      moving: "Turned Left",
+      speed: 33,
+      status: "active"
+    },
+    {
+      id: 7,
+      lat: 51.52,
+      lng: -0.16,
+      name: "Vehicle 7",
+      moving: "Stoped",
+      speed: 12,
+      status: "active"
+    },
+    {
+      id: 8,
+      lat: 51.54,
+      lng: -0.17,
+      name: "Vehicle 8",
+      moving: "Turned Left",
+      speed: 32,
+      status: "active"
+    },
+    {
+      id: 9,
+      lat: 51.52,
+      lng: -0.1,
+      name: "Vehicle 9",
+      moving: "Turned Right",
+      speed: 107,
+      status: "active"
+    },
+    {
+      id: 10,
+      lat: 51.49,
+      lng: -0.11,
+      name: "Vehicle 10",
+      moving: "Turned Right",
+      speed: 89,
+      status: "inactive"
+    }
+    // Add more vehicle data here
+  ];
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="flex min-h-screen  ">
+      <div className="w-1/2">
+        <VehiclesMap vehicles={vehicles} />
+      </div>
+      <div className="w-1/2 flex max-h-[400px] bg-white overflow-y-auto min-h-screen">
+        <div className="px-3 py-3">
+          <div className="flex items-center my-5">
+            <SignalIcon className="mr-2" height={24} />
+            <h3>Live Status</h3>
+          </div>
+          <ul role="list" className="divide-y space-y-4  divide-white/5">
+            {vehicles.map((vehicle) => (
+              <li
+                key={vehicle?.commit}
+                className="py-3 px-3 flex items-center bg-gray-50 rounded-lg space-x-4">
+                <div className="">
+                  {vehicle.moving === "Turned Left" && (
+                    <ArrowUturnLeftIcon width={18} />
+                  )}
+                  {vehicle.moving === "Turned Right" && (
+                    <ArrowUturnRightIcon width={18} />
+                  )}
+                  {vehicle.moving === "Stoped" && <StopIcon width={18} />}
+                </div>
+
+                <div className="">
+                  <p>{vehicle.name}</p>
+                  <p>{vehicle.status}</p>
+                </div>
+
+                <div className="">
+                  <p>{vehicle.moving}</p>
+                  <p>{vehicle.speed} kph</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
     </main>
-  )
+  );
 }
